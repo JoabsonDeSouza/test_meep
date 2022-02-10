@@ -1,18 +1,32 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useCallback } from 'react';
+import Footer from './CartFooter';
+import Header from '../../components/Header';
+import { useProduct } from '../../context/product';
+import Card from './Card';
 
-// import { Container } from './styles';
+import { Container, List } from './styles';
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const { listProducts, listProductsToBuy } = useProduct();
+
+  const renderItems = useCallback(({ item }) => {
+    return <Card item={item} />;
+  }, []);
+
+  const keyExtractor = useCallback(item => item.id.toString(), []);
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate('ProductDetail')}>
-        <Text>Home</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      <Header title="CATÁLOGO" />
+      <Container>
+        <List
+          data={listProducts}
+          keyExtractor={keyExtractor}
+          renderItem={renderItems}
+        />
+      </Container>
+      {listProductsToBuy.length > 0 && <Footer />}
+    </>
   );
 };
 

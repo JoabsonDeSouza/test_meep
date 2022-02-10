@@ -4,15 +4,26 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from '../pages/Home';
 import ProductDetail from '../pages/ProductDetail';
+import ListProductsPay from '../pages/ListProductsPay';
+import { RootStackParamList } from './types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function ProductsStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="ProductDetail" component={ProductDetail} />
+      <Stack.Screen name="ListProductsPay" component={ListProductsPay} />
+    </Stack.Navigator>
+  );
+}
 
 function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="ProductDetail" component={ProductDetail} />
+        <Stack.Screen name="Products" component={ProductsStack} />
       </Stack.Navigator>
     </NavigationContainer>
   );
