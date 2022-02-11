@@ -2,7 +2,7 @@
 
 Este é um projeto desenvolvido em React Native, para o teste da MEEP.
 
-<img align="center" alt="PNG" src="/src/assets/app.gif" width="100%" />
+<img align="center" alt="PNG" src="/src/assets/app.gif" width="50%" />
 
 <br />
 
