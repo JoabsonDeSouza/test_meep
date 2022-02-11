@@ -41,14 +41,15 @@ const Card = ({ item }: CardProps) => {
           </Text>
           <Counter amount={amount} setAmount={setAmount} />
         </ContainerView>
+        <Text>{item.observation}</Text>
+        <ButtonDelete onPress={handleDelete}>
+          <ImageDelete
+            source={{
+              uri: 'https://iconsplace.com/wp-content/uploads/_icons/ff0000/256/png/trash-icon-14-256.png',
+            }}
+          />
+        </ButtonDelete>
       </ContainerTexts>
-      <ButtonDelete onPress={handleDelete}>
-        <ImageDelete
-          source={{
-            uri: 'https://iconsplace.com/wp-content/uploads/_icons/ff0000/256/png/trash-icon-14-256.png',
-          }}
-        />
-      </ButtonDelete>
     </Container>
   );
 };

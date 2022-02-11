@@ -43,9 +43,7 @@ export const ButtonDelete = styled.TouchableOpacity`
   width: 20px;
   height: 20px;
   border-radius: 6px;
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+  align-self: flex-end;
 `;
 
 export const ImageDelete = styled.Image`

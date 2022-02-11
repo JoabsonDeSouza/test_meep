@@ -8,14 +8,15 @@ export const Container = styled.View`
 
 export const List = styled(FlatList).attrs({
   showsVerticalScrollIndicator: false,
-  contentContainerStyle: { padding: 20, paddingBottom: 100 },
+  contentContainerStyle: { padding: 20, paddingBottom: 200 },
 })``;
 
 export const ContainerTotal = styled.View`
   position: absolute;
   bottom: 0px;
   width: 100%;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
+  background-color: #ececec;
 `;
 
 export const ContainerTotalText = styled.View`
