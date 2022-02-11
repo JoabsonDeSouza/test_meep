@@ -8,13 +8,15 @@ import {
   ContainerTexts,
   Text,
   ContainerView,
+  ButtonDelete,
+  ImageDelete,
 } from './styles';
 import { CardProps } from './types';
 import { calculatePriceByAmount } from '../../../utils/utils';
 import { useProduct } from '../../../context/product';
 
 const Card = ({ item }: CardProps) => {
-  const { updateListProductsToBuy } = useProduct();
+  const { updateListProductsToBuy, removeProductToBuy } = useProduct();
 
   const [amount, setAmount] = useState<number>(item?.amount || 1);
 
@@ -23,6 +25,10 @@ const Card = ({ item }: CardProps) => {
       updateListProductsToBuy({ ...item, amount });
     }
   }, [amount, item, updateListProductsToBuy]);
+
+  const handleDelete = () => {
+    removeProductToBuy(item);
+  };
 
   return (
     <Container>
@@ -36,6 +42,13 @@ const Card = ({ item }: CardProps) => {
           <Counter amount={amount} setAmount={setAmount} />
         </ContainerView>
       </ContainerTexts>
+      <ButtonDelete onPress={handleDelete}>
+        <ImageDelete
+          source={{
+            uri: 'https://iconsplace.com/wp-content/uploads/_icons/ff0000/256/png/trash-icon-14-256.png',
+          }}
+        />
+      </ButtonDelete>
     </Container>
   );
 };

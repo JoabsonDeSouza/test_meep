@@ -12,6 +12,7 @@ interface ProductContextData {
   listProducts: Product[];
   listProductsToBuy: Product[];
   updateListProductsToBuy: (product: Product) => void;
+  removeProductToBuy: (product: Product) => void;
   getProductsService: () => void;
 }
 
@@ -58,6 +59,14 @@ const ProductProvider: React.FC = ({ children }) => {
     [listProductsToBuy],
   );
 
+  const removeProductToBuy = useCallback(
+    (product: Product) => {
+      const list = listProductsToBuy.filter(item => item.id !== product.id);
+      setListProductsToBuy(list);
+    },
+    [listProductsToBuy],
+  );
+
   const initialState = useCallback(async () => {
     await getProductsService();
   }, []);
@@ -73,6 +82,7 @@ const ProductProvider: React.FC = ({ children }) => {
         listProductsToBuy,
         updateListProductsToBuy,
         getProductsService,
+        removeProductToBuy,
       }}>
       {children}
     </ProductContext.Provider>

@@ -37,3 +37,17 @@ export const Text = styled.Text<TextProps>`
   font-weight: ${({ title }) => (title ? 'bold' : 'normal')};
   margin-bottom: 10px;
 `;
+
+export const ButtonDelete = styled.TouchableOpacity`
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+`;
+
+export const ImageDelete = styled.Image`
+  width: 100%;
+  height: 100%;
+`;

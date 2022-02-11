@@ -45,21 +45,24 @@ const ListProductsPay: React.FC = () => {
           keyExtractor={keyExtractor}
           renderItem={renderItems}
         />
-        <ContainerTotal>
-          <ContainerTotalText>
-            <Text bold>TOTAL DE ITENS: </Text>
-            <Text>{getQtdProducts(listProductsToBuy)}</Text>
-          </ContainerTotalText>
-          <ContainerTotalText>
-            <Text bold>TOTAL A PAGAR: </Text>
-            <Text>{getProductsValue(listProductsToBuy)}</Text>
-          </ContainerTotalText>
-          <ButtonAdd onPress={handleSend}>
-            <Text size={15} color="white" bold withOutMargin>
-              ENVIAR PEDIDO
-            </Text>
-          </ButtonAdd>
-        </ContainerTotal>
+        {listProductsToBuy.length !== 0 && (
+          <ContainerTotal>
+            <ContainerTotalText>
+              <Text bold>TOTAL DE ITENS: </Text>
+              <Text>{getQtdProducts(listProductsToBuy)}</Text>
+            </ContainerTotalText>
+            <ContainerTotalText>
+              <Text bold>TOTAL A PAGAR: </Text>
+              <Text>{getProductsValue(listProductsToBuy)}</Text>
+            </ContainerTotalText>
+
+            <ButtonAdd onPress={handleSend}>
+              <Text size={15} color="white" bold withOutMargin>
+                ENVIAR PEDIDO
+              </Text>
+            </ButtonAdd>
+          </ContainerTotal>
+        )}
       </Container>
       {loading && <Loading />}
     </>
