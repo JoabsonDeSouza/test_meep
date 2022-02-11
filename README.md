@@ -2,9 +2,7 @@
 
 Este é um projeto desenvolvido em React Native, para o teste da MEEP.
 
-<video width="320" height="240" controls>
-  <source src="/src/assets/app.mp4" type="video/mp4">
-</video>
+<img align="center" alt="PNG" src="/src/assets/app.mp4" width="40%" />
 
 <br />
 
