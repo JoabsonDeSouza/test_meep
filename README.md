@@ -2,7 +2,7 @@
 
 Este é um projeto desenvolvido em React Native, para o teste da MEEP.
 
-<img align="center" alt="PNG" src="/src/assets/app.gif" width="50%" />
+<img align="center" alt="PNG" src="/src/assets/app.gif" width="40%" />
 
 <br />
 
@@ -14,6 +14,7 @@ Este é um projeto desenvolvido em React Native, para o teste da MEEP.
 - React Navigation 6
 - React Native Animated
 - Context Api
+- Axios
   <br />
 
 ### Instalação
