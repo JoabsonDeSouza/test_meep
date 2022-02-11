@@ -79,10 +79,10 @@ const ProductDetail: React.FC = () => {
       <Header title="DETALHES DO PRODUTO" goBack />
       <ContainerScrollView showsVerticalScrollIndicator={false}>
         <Container>
-          <ContainerImage>
+          <ContainerImage animation="slideInRight" useNativeDriver delay={100}>
             <Image source={{ uri: `${product.image}` }} />
           </ContainerImage>
-          <ContainerTexts>
+          <ContainerTexts animation="fadeInUp" useNativeDriver>
             <Text bold size={20}>
               {product.title}
             </Text>

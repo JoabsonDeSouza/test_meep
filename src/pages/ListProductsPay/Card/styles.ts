@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+import { View } from 'react-native-animatable';
 
-export const Container = styled.View`
-  min-height: 120px;
+export const Container = styled(View)`
+  min-height: 130px;
   width: 100%;
   background-color: white;
   border-radius: 8px;

@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { View } from 'react-native-animatable';
 
 export const ContainerScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
@@ -12,7 +13,7 @@ export const Container = styled.View`
   flex: 1;
 `;
 
-export const ContainerImage = styled.View`
+export const ContainerImage = styled(View)`
   width: 100%;
   background: white;
 `;
@@ -26,7 +27,7 @@ export const Image = styled.Image.attrs({
   background: white;
 `;
 
-export const ContainerTexts = styled.View`
+export const ContainerTexts = styled(View)`
   flex: 1;
   padding: 20px;
 `;

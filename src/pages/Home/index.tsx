@@ -9,8 +9,8 @@ import { Container, List } from './styles';
 const Home: React.FC = () => {
   const { listProducts, listProductsToBuy } = useProduct();
 
-  const renderItems = useCallback(({ item }) => {
-    return <Card item={item} />;
+  const renderItems = useCallback(({ item, index }) => {
+    return <Card item={item} index={index} />;
   }, []);
 
   const keyExtractor = useCallback(item => item.id.toString(), []);

@@ -1,4 +1,7 @@
 import styled from 'styled-components/native';
+import { View } from 'react-native-animatable';
+
+export const ContainerParent = styled(View)``;
 
 export const Container = styled.TouchableOpacity`
   height: 120px;

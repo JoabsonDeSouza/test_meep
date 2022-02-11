@@ -31,7 +31,7 @@ const Card = ({ item }: CardProps) => {
   };
 
   return (
-    <Container>
+    <Container animation="slideInRight" useNativeDriver>
       <Image source={{ uri: `${item.image}` }} />
       <ContainerTexts>
         <Text>{item.title}</Text>
