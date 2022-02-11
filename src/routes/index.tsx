@@ -15,7 +15,10 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function ProductsStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen
         name="ProductDetail"
