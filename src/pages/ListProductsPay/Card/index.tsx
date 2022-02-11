@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { useNavigation } from '@react-navigation/native';
 import Counter from '../../../components/Counter';
 
 import {
@@ -10,16 +9,14 @@ import {
   Text,
   ContainerView,
 } from './styles';
-import { CardProps, NavigationProp } from './types';
-import { formatValueByCurrency } from '../../../utils/utils';
+import { CardProps } from './types';
+import { calculatePriceByAmount } from '../../../utils/utils';
 import { useProduct } from '../../../context/product';
 
 const Card = ({ item }: CardProps) => {
   const { updateListProductsToBuy } = useProduct();
-  const navigation = useNavigation<NavigationProp>();
 
   const [amount, setAmount] = useState<number>(item?.amount || 1);
-  const [price, setPrice] = useState<string>(item?.price.toString());
 
   useEffect(() => {
     if (amount !== item?.amount) {
@@ -28,24 +25,15 @@ const Card = ({ item }: CardProps) => {
   }, [amount, item, updateListProductsToBuy]);
 
   return (
-    <Container
-      onPress={() =>
-        navigation.navigate('ProductDetail', {
-          product: item,
-          hideButton: true,
-        })
-      }>
+    <Container>
       <Image source={{ uri: `${item.image}` }} />
       <ContainerTexts>
         <Text>{item.title}</Text>
         <ContainerView>
-          <Text title>{formatValueByCurrency(price)}</Text>
-          <Counter
-            price={item?.price}
-            setPrice={setPrice}
-            amount={amount}
-            setAmount={setAmount}
-          />
+          <Text title>
+            {calculatePriceByAmount(item?.price.toFixed(2), amount)}
+          </Text>
+          <Counter amount={amount} setAmount={setAmount} />
         </ContainerView>
       </ContainerTexts>
     </Container>

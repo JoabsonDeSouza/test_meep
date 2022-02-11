@@ -12,6 +12,7 @@ interface ProductContextData {
   listProducts: Product[];
   listProductsToBuy: Product[];
   updateListProductsToBuy: (product: Product) => void;
+  getProductsService: () => void;
 }
 
 const ProductContext = createContext({} as ProductContextData);
@@ -21,10 +22,10 @@ const ProductProvider: React.FC = ({ children }) => {
   const [listProductsToBuy, setListProductsToBuy] = useState<Product[]>([]);
 
   const getProductsService = async () => {
-    console.log('testa?');
     try {
       const result = await GetAllProducts();
       setListProducts(result.data);
+      setListProductsToBuy([]);
     } catch (error) {
       setListProducts([]);
     }
@@ -32,7 +33,6 @@ const ProductProvider: React.FC = ({ children }) => {
 
   const updateListProductsToBuy = useCallback(
     (product: Product) => {
-      console.log('listProductsToBuy', listProductsToBuy.length, product.id);
       if (listProductsToBuy.length === 0) {
         setListProductsToBuy([product]);
         return;
@@ -72,6 +72,7 @@ const ProductProvider: React.FC = ({ children }) => {
         listProducts,
         listProductsToBuy,
         updateListProductsToBuy,
+        getProductsService,
       }}>
       {children}
     </ProductContext.Provider>

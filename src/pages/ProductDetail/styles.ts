@@ -6,11 +6,15 @@ export const ContainerScrollView = styled.ScrollView.attrs({
   },
 })`
   flex: 1;
-  background-color: #fff;
 `;
 
 export const Container = styled.View`
   flex: 1;
+`;
+
+export const ContainerImage = styled.View`
+  width: 100%;
+  background: white;
 `;
 
 export const Image = styled.Image.attrs({
@@ -19,6 +23,7 @@ export const Image = styled.Image.attrs({
   height: 200px;
   width: 80%;
   align-self: center;
+  background: white;
 `;
 
 export const ContainerTexts = styled.View`

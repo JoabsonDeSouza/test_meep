@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import {
+  RouteProp,
+  useNavigation,
+  useRoute,
+  useIsFocused,
+} from '@react-navigation/native';
 import Header from '../../components/Header';
 import { Product } from '../../model/product';
 import { NavigationProp } from '../../routes/types';
@@ -12,12 +17,13 @@ import {
   ContainerTexts,
   Input,
   ContainerButtons,
+  ContainerImage,
   ContainerScrollView,
   ButtonAdd,
 } from './styles';
 import Counter from '../../components/Counter';
 import { useProduct } from '../../context/product';
-import { formatValueByCurrency } from '../../utils/utils';
+import { calculatePriceByAmount } from '../../utils/utils';
 
 const ProductDetail: React.FC = () => {
   const { listProductsToBuy, updateListProductsToBuy } = useProduct();
@@ -27,19 +33,32 @@ const ProductDetail: React.FC = () => {
     'params'
   > = useRoute();
 
-  const productExists = listProductsToBuy.find(
-    item => item.id === route.params.product.id,
-  );
-  const product = productExists || route?.params?.product;
+  const product = route?.params?.product;
 
   const hideButton = route?.params?.hideButton;
 
   const [amount, setAmount] = useState<number>(product?.amount || 1);
-  const currentPrice = product?.price * (product?.amount || 1);
-  const [price, setPrice] = useState<string>(currentPrice.toString());
   const [observation, setObservation] = useState<string>(
-    product?.observation || '',
+    product.observation || '',
   );
+
+  const isFocused = useIsFocused();
+
+  const mountComponent = useCallback(() => {
+    const productExists = listProductsToBuy.find(
+      item => item.id === route.params.product.id,
+    );
+
+    if (productExists) {
+      setAmount(productExists?.amount || 1);
+    }
+  }, [listProductsToBuy, route.params.product]);
+
+  useEffect(() => {
+    if (isFocused) {
+      mountComponent();
+    }
+  }, [isFocused, mountComponent]);
 
   const handleAddProduct = () => {
     const productToBuy: Product = {
@@ -60,14 +79,19 @@ const ProductDetail: React.FC = () => {
       <Header title="DETALHES DO PRODUTO" goBack />
       <ContainerScrollView showsVerticalScrollIndicator={false}>
         <Container>
-          <Image source={{ uri: `${product.image}` }} />
+          <ContainerImage>
+            <Image source={{ uri: `${product.image}` }} />
+          </ContainerImage>
           <ContainerTexts>
             <Text bold size={20}>
               {product.title}
             </Text>
             <Text size={15}>{product.description}</Text>
             <Text bold size={30}>
-              {formatValueByCurrency(price)}
+              {calculatePriceByAmount(
+                product?.price.toFixed(2),
+                hideButton ? 1 : amount,
+              )}
             </Text>
 
             <Text />
@@ -77,15 +101,11 @@ const ProductDetail: React.FC = () => {
               onChangeText={setObservation}
               autoCompleteType="off"
               autoCorrect={false}
+              multiline
             />
             {!hideButton && (
               <ContainerButtons>
-                <Counter
-                  price={product?.price}
-                  setPrice={setPrice}
-                  amount={amount}
-                  setAmount={setAmount}
-                />
+                <Counter amount={amount} setAmount={setAmount} />
                 <ButtonAdd onPress={handleAddProduct}>
                   <Text size={15} color="white" bold withOutMargin>
                     ADICIONAR

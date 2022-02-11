@@ -18,6 +18,10 @@ export const getQtdProducts = (list: Product[]) => {
   return qtdProducts;
 };
 
+export const calculatePriceByAmount = (price: string, amount: number) => {
+  return formatValueByCurrency(Number(price) * amount);
+};
+
 export function formatValueByCurrency(value: string | number): string {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',

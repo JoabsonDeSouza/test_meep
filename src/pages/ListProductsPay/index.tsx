@@ -1,7 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/Header';
 import { useProduct } from '../../context/product';
 import { getProductsValue, getQtdProducts } from '../../utils/utils';
+import { NavigationProp } from '../../routes/types';
+
 import Card from './Card';
 
 import {
@@ -12,9 +16,12 @@ import {
   ContainerTotalText,
   ButtonAdd,
 } from './styles';
+import Loading from '../../components/Loading';
 
 const ListProductsPay: React.FC = () => {
+  const navigation = useNavigation<NavigationProp>();
   const { listProductsToBuy } = useProduct();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const renderItems = useCallback(({ item }) => {
     return <Card item={item} />;
@@ -22,7 +29,12 @@ const ListProductsPay: React.FC = () => {
 
   const keyExtractor = useCallback(item => item.id.toString(), []);
 
-  const handleSend = useCallback(() => {}, []);
+  const handleSend = useCallback(() => {
+    setLoading(true);
+    setTimeout(() => {
+      navigation.replace('PayFinished');
+    }, 2000);
+  }, [navigation]);
 
   return (
     <>
@@ -49,6 +61,7 @@ const ListProductsPay: React.FC = () => {
           </ButtonAdd>
         </ContainerTotal>
       </Container>
+      {loading && <Loading />}
     </>
   );
 };

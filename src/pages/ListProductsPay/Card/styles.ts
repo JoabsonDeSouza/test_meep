@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity`
-  height: 120px;
+export const Container = styled.View`
+  min-height: 120px;
   width: 100%;
   background-color: white;
   border-radius: 8px;
@@ -10,8 +10,10 @@ export const Container = styled.TouchableOpacity`
   padding: 10px;
 `;
 
-export const Image = styled.Image`
-  height: 100%;
+export const Image = styled.Image.attrs({
+  resizeMode: 'cover',
+})`
+  height: 100px;
   width: 30%;
 `;
 

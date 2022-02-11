@@ -3,20 +3,16 @@ import React from 'react';
 import { ButtonCount, Count, Container, Text } from './styles';
 
 interface Props {
-  price: number;
-  setPrice: (value: string) => void;
   amount: number;
   setAmount: (value: number) => void;
 }
 
-const Counter = ({ price, setPrice, amount, setAmount }: Props) => {
+const Counter = ({ amount, setAmount }: Props) => {
   const handleAddCount = () => {
     if (amount >= 10) {
       return;
     }
     setAmount(amount + 1);
-    const calculate = (amount + 1) * price;
-    setPrice(calculate.toFixed(2));
   };
 
   const handleRemoveCount = () => {
@@ -25,8 +21,6 @@ const Counter = ({ price, setPrice, amount, setAmount }: Props) => {
     }
 
     setAmount(amount - 1);
-    const calculate = (amount - 1) * price;
-    setPrice(calculate.toFixed(2));
   };
 
   return (

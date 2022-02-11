@@ -11,6 +11,7 @@ export type RootStackParamList = {
   ProductDetail: RouteParams;
   Products: undefined;
   ListProductsPay: undefined;
+  PayFinished: undefined;
 };
 
 export type NavigationProp = StackNavigationProp<
